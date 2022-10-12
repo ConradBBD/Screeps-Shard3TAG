@@ -74,7 +74,7 @@ module.exports.loop = function () {
     if(retrievers.length < 3) {
         var newName = 'Retriever' + Game.time;
         console.log('Spawning new retriever: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY, MOVE], newName, 
+        Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, MOVE, MOVE], newName, 
             {memory: {role: 'retriever'}});
     }
     
