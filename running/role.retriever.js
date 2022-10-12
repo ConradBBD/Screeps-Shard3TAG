@@ -21,8 +21,20 @@ var roleRetriever = {
                     }
             });
             if(targets.length > 0) {
-                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                let spawnTarget = targets.find(target => target.structureType == STRUCTURE_SPAWN);
+                let extensionTarget = targets.find(target => target.structureType == STRUCTURE_EXTENSION);
+                if (spawnTarget.store.getFreeCapacity() > 0) {
+                    if(creep.transfer(spawnTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(spawnTarget, {visualizePathStyle: {stroke: '#ffffff'}});
+                    }
+                } else if (extensionTarget.store.getFreeCapacity() > 0) {
+                    if(creep.transfer(extensionTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(extensionTarget, {visualizePathStyle: {stroke: '#ffffff'}});
+                    }
+                } else {
+                    if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                    }
                 }
             }
         }
