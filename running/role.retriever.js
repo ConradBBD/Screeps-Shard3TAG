@@ -11,35 +11,56 @@ var roleRetriever = {
             }
         }
         else {
-            var targets = creep.room.find(FIND_STRUCTURES, {
+            var spawnTargets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_SPAWN ||
-                                structure.structureType == STRUCTURE_EXTENSION ||
-                                structure.structureType == STRUCTURE_CONTAINER ||
+                        return structure.structureType == STRUCTURE_SPAWN && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    }
+                });
+            var extensionTargets = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return structure.structureType == STRUCTURE_EXTENSION && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                }
+            });
+            var otherTargets = creep.room.find(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_CONTAINER ||
                                 structure.structureType == STRUCTURE_TOWER) && 
                                 structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                     }
             });
-            if(targets.length > 0) {
-                let spawnTarget = targets.find(target => target.structureType == STRUCTURE_SPAWN);
-                console.log('spawnTarget: ' + spawnTarget.name);
-                // targets.removeItemOnce(spawnTarget);
-                let extensionTarget = targets.find(target => target.structureType == STRUCTURE_EXTENSION);
-                // targets.removeItemOnce(extensionTarget);
-                if (spawnTarget && spawnTarget.store.getFreeCapacity() > 0) {
-                    if(creep.transfer(spawnTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(spawnTarget, {visualizePathStyle: {stroke: '#ffffff'}});
-                    }
-                } else if (extensionTarget && extensionTarget.store.getFreeCapacity() > 0) {
-                    if(creep.transfer(extensionTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(extensionTarget, {visualizePathStyle: {stroke: '#ffffff'}});
-                    }
-                } else {
-                    if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
-                    }
+            if (spawnTargets.length > 0) {
+                if(creep.transfer(spawnTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(spawnTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                }
+            } else if (extensionTargets.length > 0) {
+                if(creep.transfer(extensionTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(extensionTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                }
+            } else if (otherTargets.length > 0) {
+                if(creep.transfer(otherTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(otherTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
+            // if(targets.length > 0) {
+            //     let spawnTarget = targets.find(target => target.structureType == STRUCTURE_SPAWN);
+            //     console.log('spawnTarget: ' + spawnTarget.name);
+            //     // targets.removeItemOnce(spawnTarget);
+            //     let extensionTarget = targets.find(target => target.structureType == STRUCTURE_EXTENSION);
+            //     // targets.removeItemOnce(extensionTarget);
+            //     if (spawnTarget && spawnTarget.store.getFreeCapacity() > 0) {
+            //         if(creep.transfer(spawnTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            //             creep.moveTo(spawnTarget, {visualizePathStyle: {stroke: '#ffffff'}});
+            //         }
+            //     } else if (extensionTarget && extensionTarget.store.getFreeCapacity() > 0) {
+            //         if(creep.transfer(extensionTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            //             creep.moveTo(extensionTarget, {visualizePathStyle: {stroke: '#ffffff'}});
+            //         }
+            //     } else {
+            //         if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            //             creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+            //         }
+            //     }
+            // }
         }
 	}
 };
