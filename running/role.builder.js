@@ -32,8 +32,8 @@ var roleBuilder = {
 						}
 					}
 				}
-				if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-					creep.moveTo(target);
+				if(containerIndex != -1 && creep.withdraw(target[containerIndex], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(target[containerIndex]);
 				}
 			} else {
 				target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
