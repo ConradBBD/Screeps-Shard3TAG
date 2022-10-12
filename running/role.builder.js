@@ -26,8 +26,8 @@ var roleBuilder = {
 					return structure.structureType == STRUCTURE_CONTAINER && 
 							structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
 				}
-		});
-			if (targetContainer) {
+			});
+			if (targetContainer.length > 0) {
 				var containerIndex = -1;
 				for (let i = 0; i < targetContainer.length; i++) {
 					if (targetContainer[i].structureType == STRUCTURE_CONTAINER) {
