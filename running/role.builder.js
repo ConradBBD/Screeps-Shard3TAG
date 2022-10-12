@@ -21,23 +21,24 @@ var roleBuilder = {
             }
 	    }
 	    else {
-	        var target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
-            if(target) {
-                if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
-                }
-            } else {
-				target = creep.room.find(FIND_MY_STRUCTURES);
-				if (target) {
-					var containerIndex = -1;
-					for (let i = 0; i < target.length; i++) {
-						if (target[i].structureType = 'STRUCTURE_CONTAINER') {
-							if (target[i].store.getCapacity() > 0) {
-								containerIndex = i;
-							}
+
+			var target = creep.room.find(FIND_MY_STRUCTURES);
+			if (target) {
+				var containerIndex = -1;
+				for (let i = 0; i < target.length; i++) {
+					if (target[i].structureType = 'STRUCTURE_CONTAINER') {
+						if (target[i].store.getCapacity() > 0) {
+							containerIndex = i;
 						}
 					}
-					if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+				}
+				if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(target);
+				}
+			} else {
+				target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+				if(target) {
+					if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
 						creep.moveTo(target);
 					}
 				}

@@ -49,6 +49,13 @@ module.exports.loop = function () {
         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
             {memory: {role: 'harvester'}});
     }
+
+    if(retrievers.length < 2) {
+        var newName = 'Retriever' + Game.time;
+        console.log('Spawning new retriever: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, MOVE, MOVE], newName, 
+            {memory: {role: 'retriever'}});
+    }
     
     if(harvesters2.length < 3) {
         var newName = 'HarvesterTwo' + Game.time;
@@ -69,13 +76,6 @@ module.exports.loop = function () {
         console.log('Spawning new builder: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
             {memory: {role: 'builder'}});
-    }
-    
-    if(retrievers.length < 1) {
-        var newName = 'Retriever' + Game.time;
-        console.log('Spawning new retriever: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, MOVE, MOVE], newName, 
-            {memory: {role: 'retriever'}});
     }
     
     if(Game.spawns['Spawn1'].spawning) { 
