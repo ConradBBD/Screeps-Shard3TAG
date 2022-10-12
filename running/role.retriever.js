@@ -22,14 +22,14 @@ var roleRetriever = {
             });
             if(targets.length > 0) {
                 let spawnTarget = targets.find(target => target.structureType == STRUCTURE_SPAWN);
-                targets.removeItemOnce(spawnTarget);
+                // targets.removeItemOnce(spawnTarget);
                 let extensionTarget = targets.find(target => target.structureType == STRUCTURE_EXTENSION);
-                targets.removeItemOnce(extensionTarget);
-                if (spawnTarget.store.getFreeCapacity() > 0) {
+                // targets.removeItemOnce(extensionTarget);
+                if (spawnTarget && spawnTarget.store.getFreeCapacity() > 0) {
                     if(creep.transfer(spawnTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(spawnTarget, {visualizePathStyle: {stroke: '#ffffff'}});
                     }
-                } else if (extensionTarget.store.getFreeCapacity() > 0) {
+                } else if (extensionTarget && extensionTarget.store.getFreeCapacity() > 0) {
                     if(creep.transfer(extensionTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(extensionTarget, {visualizePathStyle: {stroke: '#ffffff'}});
                     }
