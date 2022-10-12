@@ -22,6 +22,7 @@ var roleRetriever = {
             });
             if(targets.length > 0) {
                 let spawnTarget = targets.find(target => target.structureType == STRUCTURE_SPAWN);
+                console.log('spawnTarget: ' + spawnTarget.name);
                 // targets.removeItemOnce(spawnTarget);
                 let extensionTarget = targets.find(target => target.structureType == STRUCTURE_EXTENSION);
                 // targets.removeItemOnce(extensionTarget);
