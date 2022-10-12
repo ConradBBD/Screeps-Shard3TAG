@@ -22,21 +22,21 @@ var roleBuilder = {
 	    }
 	    else {
 
-			var target = creep.room.find(FIND_MY_STRUCTURES);
-			if (target) {
+			var targetContainer = creep.room.find(FIND_STRUCTURES);
+			if (targetContainer) {
 				var containerIndex = -1;
-				for (let i = 0; i < target.length; i++) {
-					if (target[i].structureType == STRUCTURE_CONTAINER) {
-						if (target[i].store.getCapacity() > 0) {
+				for (let i = 0; i < targetContainer.length; i++) {
+					if (targetContainer[i].structureType == STRUCTURE_CONTAINER) {
+						if (targetContainer[i].store.getCapacity() > 0) {
 							containerIndex = i;
 						}
 					}
 				}
-				if(containerIndex != -1 && creep.withdraw(target[containerIndex], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-					creep.moveTo(target[containerIndex]);
+				if(containerIndex != -1 && creep.withdraw(targetContainer[containerIndex], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(targetContainer[containerIndex]);
 				}
 			} else {
-				target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+				var target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
 				if(target) {
 					if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
 						creep.moveTo(target);
