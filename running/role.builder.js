@@ -26,7 +26,7 @@ var roleBuilder = {
 			if (target) {
 				var containerIndex = -1;
 				for (let i = 0; i < target.length; i++) {
-					if (target[i].structureType === 'STRUCTURE_CONTAINER') {
+					if (target[i].structureType == STRUCTURE_CONTAINER) {
 						if (target[i].store.getCapacity() > 0) {
 							containerIndex = i;
 						}
