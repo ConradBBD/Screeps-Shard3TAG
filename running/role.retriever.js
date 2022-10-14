@@ -50,26 +50,6 @@ var roleRetriever = {
                     creep.moveTo(otherTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
-            // if(targets.length > 0) {
-            //     let spawnTarget = targets.find(target => target.structureType == STRUCTURE_SPAWN);
-            //     console.log('spawnTarget: ' + spawnTarget.name);
-            //     // targets.removeItemOnce(spawnTarget);
-            //     let extensionTarget = targets.find(target => target.structureType == STRUCTURE_EXTENSION);
-            //     // targets.removeItemOnce(extensionTarget);
-            //     if (spawnTarget && spawnTarget.store.getFreeCapacity() > 0) {
-            //         if(creep.transfer(spawnTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            //             creep.moveTo(spawnTarget, {visualizePathStyle: {stroke: '#ffffff'}});
-            //         }
-            //     } else if (extensionTarget && extensionTarget.store.getFreeCapacity() > 0) {
-            //         if(creep.transfer(extensionTarget, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            //             creep.moveTo(extensionTarget, {visualizePathStyle: {stroke: '#ffffff'}});
-            //         }
-            //     } else {
-            //         if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            //             creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
-            //         }
-            //     }
-            // }
         }
 	}
 };
