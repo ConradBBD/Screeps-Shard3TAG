@@ -41,7 +41,7 @@ var roleBuilder = {
 					creep.moveTo(targetContainer[containerIndex]);
 				}
 			} else {
-				var target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+				var target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
 				if(target) {
 					if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
 						creep.moveTo(target);
