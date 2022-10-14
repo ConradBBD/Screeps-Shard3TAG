@@ -4,7 +4,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRetriever = require('role.retriever');
 var roleRepairer = require('role.repairer');
-var roleRepairer = require('role.repairerWalls');
+var roleRepairerWalls = require('role.repairerWalls');
 
 module.exports.loop = function () {
 
@@ -79,7 +79,7 @@ module.exports.loop = function () {
             {memory: {role: 'builder'}});
     }
 
-    if(repairers.length < 1) {
+    if(repairers.length < 2) {
         var newName = 'Repairer' + Game.time;
         console.log('Spawning new repairer: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
