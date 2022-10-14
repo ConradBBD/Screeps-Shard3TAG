@@ -14,14 +14,14 @@ module.exports.loop = function () {
         }
     }
 
-    var tower = Game.getObjectById('244c5903d299e368c1baa790');
+    var tower = Game.getObjectById('6345c1f45e37700aabdaea7d');
     if(tower) {
-        var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => structure.hits < structure.hitsMax
-        });
-        if(closestDamagedStructure) {
-            tower.repair(closestDamagedStructure);
-        }
+        // var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+        //     filter: (structure) => structure.hits < structure.hitsMax
+        // });
+        // if(closestDamagedStructure) {
+        //     tower.repair(closestDamagedStructure);
+        // }
 
         var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if(closestHostile) {
@@ -75,7 +75,7 @@ module.exports.loop = function () {
             {memory: {role: 'upgrader'}});
     }
 
-    if(builders.length < 4) {
+    if(builders.length < 3) {
         var newName = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE, MOVE], newName, 

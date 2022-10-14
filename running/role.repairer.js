@@ -11,7 +11,6 @@ var roleRepairer = {
 	        creep.memory.repairing = true;
 	        creep.say('🚧 repair');
 	    }
-		
 
 		if(creep.memory.repairing) {
 	        var closestDamagedStructure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
