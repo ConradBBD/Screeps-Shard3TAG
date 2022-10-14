@@ -40,14 +40,15 @@ var roleBuilder = {
 				if(containerIndex != -1 && creep.withdraw(targetContainer[containerIndex], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 					creep.moveTo(targetContainer[containerIndex]);
 				}
-			} else {
-				var target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
-				if(target) {
-					if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
-						creep.moveTo(target);
-					}
-				}
-			}
+			} 
+			// else {
+			// 	var target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
+			// 	if(target) {
+			// 		if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
+			// 			creep.moveTo(target);
+			// 		}
+			// 	}
+			// }
 	    }
 	}
 };
