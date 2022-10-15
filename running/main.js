@@ -5,6 +5,7 @@ var roleBuilder = require('role.builder');
 var roleRetriever = require('role.retriever');
 var roleRepairer = require('role.repairer');
 var roleRepairerWalls = require('role.repairerWalls');
+var roleTransporter = require('role.transporter');
 
 module.exports.loop = function () {
 
@@ -44,6 +45,9 @@ module.exports.loop = function () {
     var repairersWalls = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairerWalls');
     console.log('RepairersWalls: ' + repairers.length);
 
+    var transporters = _.filter(Game.creeps, (creep) => creep.memory.role == 'transporters');
+    console.log('Transporters: ' + transporters.length);
+
     if(harvesters.length < 2) {
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
@@ -79,18 +83,25 @@ module.exports.loop = function () {
             {memory: {role: 'builder'}});
     }
 
-    if(repairers.length < 1) {
+    if(repairers.length < 2) {
         var newName = 'Repairer' + Game.time;
         console.log('Spawning new repairer: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
             {memory: {role: 'repairer'}});
     }
 
-    if(repairersWalls.length < 1) {
+    if(repairersWalls.length < 2) {
         var newName = 'RepairerWalls' + Game.time;
         console.log('Spawning new repairerWalls: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
             {memory: {role: 'repairerWalls'}});
+    }
+
+    if(transporters.length < 0) {
+        var newName = 'Transporter' + Game.time;
+        console.log('Spawning new transporter: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
+            {memory: {role: 'transporter'}});
     }
     
     if(Game.spawns['Spawn1'].spawning) { 
@@ -122,8 +133,11 @@ module.exports.loop = function () {
         if(creep.memory.role == 'repairer') {
             roleRepairer.run(creep);
         }
-        if(creep.memory.role == 'repairer') {
-            roleRepairer.run(creep);
+        if(creep.memory.role == 'repairerWalls') {
+            roleRepairerWalls.run(creep);
+        }
+        if(creep.memory.role == 'transporter') {
+            roleTransporter.run(creep);
         }
     }
 }

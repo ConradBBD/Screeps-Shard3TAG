@@ -13,12 +13,19 @@ var roleRepairerWalls = {
 	    }
 
 		if(creep.memory.repairing) {
-	        var closestDamagedStructure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+		    var closestDamagedRampart = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+				filter: (structure) => {return (structure.hits < structure.hitsMax) && (structure.structureType == STRUCTURE_RAMPART);}
+			});
+	        var closestDamagedWall = creep.pos.findClosestByRange(FIND_STRUCTURES, {
 				filter: (structure) => {return (structure.hits < structure.hitsMax) && (structure.structureType == STRUCTURE_WALL);}
 			});
-			if(closestDamagedStructure) {
-				if(creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE) {
-					creep.moveTo(closestDamagedStructure, {visualizePathStyle: {stroke: '#ffffff'}});
+			if(closestDamagedRampart) {
+				if(creep.repair(closestDamagedRampart) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(closestDamagedRampart, {visualizePathStyle: {stroke: '#ffffff'}});
+				}
+			} else if (closestDamagedWall) {
+			    if(creep.repair(closestDamagedWall) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(closestDamagedWall, {visualizePathStyle: {stroke: '#ffffff'}});
 				}
 			}
 	    } else {
