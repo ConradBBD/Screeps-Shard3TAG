@@ -97,10 +97,10 @@ module.exports.loop = function () {
             {memory: {role: 'repairerWalls'}});
     }
 
-    if(transporters.length < 0) {
+    if(transporters.length < 2) {
         var newName = 'Transporter' + Game.time;
         console.log('Spawning new transporter: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
+        Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, MOVE, MOVE], newName, 
             {memory: {role: 'transporter'}});
     }
     
