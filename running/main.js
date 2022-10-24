@@ -86,7 +86,7 @@ module.exports.loop = function () {
             {memory: {role: 'retriever'}});
     }
 
-    if(retrieversRemote.length < 1) {
+    if(retrieversRemote.length < 3) {
         var newName = 'RetrieverRemote' + Game.time;
         console.log('Spawning new retriever_remote: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, MOVE, MOVE], newName, 
@@ -117,7 +117,7 @@ module.exports.loop = function () {
     if(reservers.length < 1) {
         var newName = 'Reserver' + Game.time;
         console.log('Spawning new reserver: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName, 
+        Game.spawns['Spawn1'].spawnCreep([WORK, CLAIM, CARRY, MOVE, MOVE], newName, 
             {memory: {role: 'reserver'}});
     }
 
