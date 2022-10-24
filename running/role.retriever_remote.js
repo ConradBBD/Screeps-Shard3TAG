@@ -3,6 +3,8 @@ var roleRetrieverRemote = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
+
+
         if (creep.room.name == 'E36N52') {
             if (creep.store.getUsedCapacity() == 0) {
                 const targetPos = new RoomPosition(25, 34, 'E37N52');
@@ -24,7 +26,7 @@ var roleRetrieverRemote = {
                 const target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
                 if(target) {
                     if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targetPos, {visualizePathStyle: {stroke: '#ffffff'}});
+                        creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 }
             }
