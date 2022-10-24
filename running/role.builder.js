@@ -18,6 +18,23 @@ var roleBuilder = {
                 if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
+            } else {
+                var closestDamagedRampart = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+    				filter: (structure) => {return (structure.hits < structure.hitsMax) && (structure.structureType == STRUCTURE_RAMPART);}
+    			});
+    	        // var closestDamagedWall = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+    			// 	filter: (structure) => {return (structure.hits < structure.hitsMax) && (structure.structureType == STRUCTURE_WALL);}
+    			// });
+    			if(closestDamagedRampart) {
+    				if(creep.repair(closestDamagedRampart) == ERR_NOT_IN_RANGE) {
+    					creep.moveTo(closestDamagedRampart, {visualizePathStyle: {stroke: '#ffffff'}});
+    				}
+    			} 
+				// else if (closestDamagedWall) {
+    			//     if(creep.repair(closestDamagedWall) == ERR_NOT_IN_RANGE) {
+    			// 		creep.moveTo(closestDamagedWall, {visualizePathStyle: {stroke: '#ffffff'}});
+    			// 	}
+    			// }
             }
 	    }
 	    else {

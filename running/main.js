@@ -8,6 +8,10 @@ var roleRepairerWalls = require('role.repairerWalls');
 var roleTransporter = require('role.transporter');
 
 module.exports.loop = function () {
+    
+    if (Game.cpu.bucket >= 10000) {
+        Game.cpu.generatePixel();
+    }
 
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
@@ -17,6 +21,14 @@ module.exports.loop = function () {
     }
 
     var tower = Game.getObjectById('6345c1f45e37700aabdaea7d');
+    if(tower) {
+        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if(closestHostile) {
+            tower.attack(closestHostile);
+        }
+    }
+    
+    var tower = Game.getObjectById('634a90128c08ceedd36f5075');
     if(tower) {
         var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if(closestHostile) {
@@ -45,7 +57,7 @@ module.exports.loop = function () {
     var repairersWalls = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairerWalls');
     console.log('RepairersWalls: ' + repairers.length);
 
-    var transporters = _.filter(Game.creeps, (creep) => creep.memory.role == 'transporters');
+    var transporters = _.filter(Game.creeps, (creep) => creep.memory.role == 'transporter');
     console.log('Transporters: ' + transporters.length);
 
     if(harvesters.length < 2) {
