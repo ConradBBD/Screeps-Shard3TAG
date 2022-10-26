@@ -3,8 +3,6 @@ var roleRetrieverRemote = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
-
-
         if (creep.room.name == 'E36N52') {
             if (creep.store.getUsedCapacity() == 0) {
                 const targetPos = new RoomPosition(25, 34, 'E37N52');
