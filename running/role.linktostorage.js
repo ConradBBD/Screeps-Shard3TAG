@@ -7,7 +7,7 @@ var roleLinkToStore = {
         const targetLink = Game.getObjectById('6357eea07a86a45a6bc14b13');
         var roomStorage = creep.room.storage;
         if (!creep.memory.inPlace) {
-            if (creep.pos != targetPos) {
+            if (!(creep.pos == targetPos)) {
                 creep.moveTo(targetPos);
                 creep.say('Moving into place');
             } else {
