@@ -10,7 +10,7 @@ var roleRetrieverRemote = {
             } else {
                 const link2 = Game.getObjectById('635806885e9c7bf8ae704258');
                 if (link2.store.getFreeCapacity(RESOURCE_ENERGY) >= 100) {
-                    creep.transfer(link1, RESOURCE_ENERGY);
+                    creep.transfer(link2, RESOURCE_ENERGY);
                 }
 
                 var storageTargets = creep.room.find(FIND_STRUCTURES, {
