@@ -10,6 +10,7 @@ var roleRetrieverRemote = require('role.retriever_remote');
 var roleHarvesterRemote = require('role.harvester_remote');
 var roleReserver = require('role.reserver');
 var roleHarvester2Link = require('role.harvester2Link');
+var roleLinkToStore = require('role.linktostorage');
 
 module.exports.loop = function () {
     
@@ -58,6 +59,9 @@ module.exports.loop = function () {
 
     var harvesters2Link = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester2Link');
     console.log('Harvesters2Link: ' + harvesters2Link.length);
+
+    var linkToStores = _.filter(Game.creeps, (creep) => creep.memory.role == 'linktostorage');
+    console.log('LinkToStores: ' + linkToStores.length);
     
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     console.log('Upgraders: ' + upgraders.length);
@@ -119,6 +123,13 @@ module.exports.loop = function () {
         console.log('Spawning new harvester2Link: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName, 
             {memory: {role: 'harvester2Link'}});
+    }
+
+    if(linkToStores.length < 1) {
+        var newName = 'LinkToStore' + Game.time;
+        console.log('Spawning new linkToStore: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, MOVE], newName, 
+            {memory: {role: 'linktostorage'}});
     }
 
     if(harvestersRemote.length < 1) {
@@ -216,6 +227,9 @@ module.exports.loop = function () {
         }
         if(creep.memory.role == 'harvester2Link') {
             roleHarvester2Link.run(creep);
+        }
+        if(creep.memory.role == 'linktostorage') {
+            roleLinkToStore.run(creep);
         }
     }
 }
