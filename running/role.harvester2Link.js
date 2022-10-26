@@ -9,11 +9,21 @@ var roleHarvester2Link = {
                 creep.moveTo(sources[1], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
             if (sources[1].energy == 0) {
-                creep.transfer(link1, RESOURCE_ENERGY);
+                if (link1.store.getFreeCapacity(RESOURCE_ENERGY) >= 100) {
+                    creep.transfer(link1, RESOURCE_ENERGY);
+                }
+                else {
+                    creep.drop(RESOURCE_ENERGY);
+                }
             }
         }
         else {
-            creep.transfer(link1, RESOURCE_ENERGY);
+            if (link1.store.getFreeCapacity(RESOURCE_ENERGY) >= 100) {
+                creep.transfer(link1, RESOURCE_ENERGY);
+            }
+            else {
+                creep.drop(RESOURCE_ENERGY);
+            }
         }
 	}
 };
