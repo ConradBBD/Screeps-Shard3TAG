@@ -12,7 +12,7 @@ var roleAttackerWalls = {
             creep.moveTo(targetPos, {visualizePathStyle: {stroke: '#ffffff'}});
         } else if (creep.room.name == 'E37N51') {
             const target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-				filter: (structure) => {return (structure.hits == 1) && (structure.structureType == STRUCTURE_WALL);}
+				filter: (structure) => {return (structure.structureType == STRUCTURE_WALL);}
 			});
             if(target) {
                 creep.memory.hasTarget = true;
