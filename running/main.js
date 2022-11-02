@@ -147,7 +147,7 @@ module.exports.loop = function () {
     if(retrieversRemote.length < 3) {
         var newName = 'RetrieverRemote' + Game.time;
         console.log('Spawning new retriever_remote: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
+        Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, CARRY, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'retriever_remote'}});
     }
     
@@ -172,7 +172,7 @@ module.exports.loop = function () {
             {memory: {role: 'linktostorage'}});
     }
 
-    if(harvestersRemote.length < 2) {
+    if(harvestersRemote.length < 1) {
         var newName = 'HarvesterRemote' + Game.time;
         console.log('Spawning new harvesterRemote: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE], newName, 
@@ -186,7 +186,7 @@ module.exports.loop = function () {
             {memory: {role: 'upgrader'}});
     }
     
-    if(bigUpgraders.length < 1) {
+    if(bigUpgraders.length < 0) {
         var newName = 'BigUpgrader' + Game.time;
         console.log('Spawning new bigUpgrader: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], newName, 
@@ -200,7 +200,7 @@ module.exports.loop = function () {
             {memory: {role: 'reserver'}});
     }
 
-    if(builders.length < 1) {
+    if(builders.length < 0) {
         var newName = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], newName, 
@@ -221,21 +221,21 @@ module.exports.loop = function () {
             {memory: {role: 'repairerWalls'}});
     }
 
-    if(transporters.length < 4) {
+    if(transporters.length < 3) {
         var newName = 'Transporter' + Game.time;
         console.log('Spawning new transporter: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, MOVE, MOVE], newName, 
             {memory: {role: 'transporter'}});
     }
     
-    if(defenders.length < 1) {
+    if(defenders.length < 0) {
         var newName = 'Defender' + Game.time;
         console.log('Spawning new defender: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, TOUGH, TOUGH, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK], newName, 
             {memory: {role: 'attackerdefender'}});
     }
 
-    if(defenders2.length < 1) {
+    if(defenders2.length < 0) {
         var newName = 'Defender2_' + Game.time;
         console.log('Spawning new defender2: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK], newName, 
