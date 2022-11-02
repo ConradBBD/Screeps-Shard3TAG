@@ -4,11 +4,12 @@ var roleAttackerDefender2 = {
     run: function(creep) {
         if (creep.room.name == 'E36N52' || creep.room.name == 'E37N52') {
             creep.memory.inPosition = false;
+            creep.memory.hasTarget = false;
             const targetPos = new RoomPosition(22, 30, 'E37N51');
             creep.moveTo(targetPos, {visualizePathStyle: {stroke: '#ffffff'}});
         } else if (creep.room.name == 'E37N51') {
             if (!creep.memory.inPosition && !creep.memory.hasTarget) {
-                const targetPos = new RoomPosition(22, 30, 'E37N52');
+                const targetPos = new RoomPosition(22, 30, 'E37N51');
                 creep.moveTo(targetPos, {visualizePathStyle: {stroke: '#ffffff'}});
                 if (creep.pos.isEqualTo(targetPos)) {
                     creep.memory.inPosition = true;
