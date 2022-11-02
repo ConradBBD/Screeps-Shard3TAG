@@ -277,10 +277,10 @@ module.exports.loop = function () {
             {memory: {role: 'remoteretr22'}});
     }
 
-    if(reservers2.length < 1) {
+    if(reservers2.length < 2) {
         var newName = 'reserver2_' + Game.time;
         console.log('Spawning new reserver2: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, CLAIM, CLAIM, CARRY, MOVE, MOVE], newName, 
+        Game.spawns['Spawn1'].spawnCreep([WORK, CLAIM, CLAIM, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'reserver2'}});
     }
     
