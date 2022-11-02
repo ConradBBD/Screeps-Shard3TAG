@@ -13,11 +13,13 @@ var roleHarvester2Link = require('role.harvester2Link');
 var roleLinkToStore = require('role.linktostorage');
 var roleBigUpgrader = require('role.bigupgrader');
 var roleAttackerDefender = require('role.attackerdefender');
+var roleAttackerDefender2 = require('role.attackerdefender2');
 var roleAttackerWalls = require('role.attackerWalls');
 var roleHarvesterRemote2_1 = require('role.harvester_remote2_1');
 var roleHarvesterRemote2_2 = require('role.harvester_remote2_2');
 var roleRetrieverRemote2_1 = require('role.retriever_remote2_1');
 var roleRetrieverRemote2_2 = require('role.retriever_remote2_2');
+var roleReserver2 = require("role.reserver2");
 
 
 // Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, TOUGH, TOUGH, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK], "Attacker1", {memory: {role: 'attackerdefender'}});
@@ -107,6 +109,9 @@ module.exports.loop = function () {
     var defenders = _.filter(Game.creeps, (creep) => creep.memory.role == 'attackerdefender');
     console.log('Defenders: ' + defenders.length);
 
+    var defenders2 = _.filter(Game.creeps, (creep) => creep.memory.role == 'attackerdefender2');
+    console.log('Defenders2: ' + defenders2.length);
+
     var wallAttackers = _.filter(Game.creeps, (creep) => creep.memory.role == 'wallAttacker');
     console.log('WallAttacker: ' + wallAttackers.length);
 
@@ -121,6 +126,9 @@ module.exports.loop = function () {
 
     var remoteRetrievers22 = _.filter(Game.creeps, (creep) => creep.memory.role == 'remoteretr22');
     console.log('Remote Retrievers 2_2: ' + remoteRetrievers22.length);
+
+    var reservers2 = _.filter(Game.creeps, (creep) => creep.memory.role == 'reserver2');
+    console.log('Remote reservers 2: ' + reservers2.length);
 
     if(harvesters.length < 1) {
         var newName = 'Harvester' + Game.time;
@@ -227,6 +235,13 @@ module.exports.loop = function () {
             {memory: {role: 'attackerdefender'}});
     }
 
+    if(defenders2.length < 1) {
+        var newName = 'Defender2_' + Game.time;
+        console.log('Spawning new defender2: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, TOUGH, TOUGH, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK], newName, 
+            {memory: {role: 'attackerdefender2'}});
+    }
+
     if(wallAttackers.length < 0) {
         var newName = 'WallAttacker' + Game.time;
         console.log('Spawning new wall attacker: ' + newName);
@@ -235,31 +250,38 @@ module.exports.loop = function () {
     }
 
     if(remoteHarvesters21.length < 0) {
-        var newName = 'RemoteHarvester21' + Game.time;
+        var newName = 'RemoteHarvester21_' + Game.time;
         console.log('Spawning new RemoteHarvester21: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'remoteharv21'}});
     }
 
     if(remoteHarvesters22.length < 0) {
-        var newName = 'RemoteHarvester22' + Game.time;
+        var newName = 'RemoteHarvester22_' + Game.time;
         console.log('Spawning new RemoteHarvester22: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'remoteharv22'}});
     }
 
     if(remoteRetrievers21.length < 0) {
-        var newName = 'remoteRetrievers21' + Game.time;
+        var newName = 'remoteRetrievers21_' + Game.time;
         console.log('Spawning new remoteRetrievers21: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'remoteretr21'}});
     }
 
     if(remoteRetrievers22.length < 0) {
-        var newName = 'remoteRetrievers22' + Game.time;
+        var newName = 'remoteRetrievers22_' + Game.time;
         console.log('Spawning new remoteRetrievers22: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'remoteretr22'}});
+    }
+
+    if(reservers2.length < 1) {
+        var newName = 'reserver2_' + Game.time;
+        console.log('Spawning new reserver2: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep([WORK, CLAIM, CLAIM, CARRY, MOVE, MOVE], newName, 
+            {memory: {role: 'reserver2'}});
     }
     
     if(Game.spawns['Spawn1'].spawning) { 
@@ -318,6 +340,9 @@ module.exports.loop = function () {
         if(creep.memory.role == 'attackerdefender') {
             roleAttackerDefender.run(creep);
         }
+        if(creep.memory.role == 'attackerdefender2') {
+            roleAttackerDefender2.run(creep);
+        }
         if(creep.memory.role == 'wallAttacker') {
             roleAttackerWalls.run(creep);
         }
@@ -332,6 +357,9 @@ module.exports.loop = function () {
         }
         if(creep.memory.role == 'remoteretr22') {
             roleRetrieverRemote2_2.run(creep);
+        }
+        if(creep.memory.role == 'reserver2') {
+            roleReserver2.run(creep);
         }
     }
 }

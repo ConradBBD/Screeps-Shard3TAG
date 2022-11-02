@@ -23,7 +23,7 @@ var roleHarvesterRemote2_2 = {
         }
         if (creep.room.name == 'E37N51') {
             if(creep.store.getFreeCapacity() > 0) {
-                var source = creep.room.findClosestByPath(FIND_SOURCES);
+                var source = creep.pos.findClosestByPath(FIND_SOURCES);
                 if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
                 }

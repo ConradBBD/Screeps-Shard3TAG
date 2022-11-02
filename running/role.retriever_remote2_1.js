@@ -51,6 +51,9 @@ var roleRetrieverRemote2_1 = {
                         creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                     }
                 }
+            } else {
+                const targetPos = new RoomPosition(15, 21, 'E36N52');
+                creep.moveTo(targetPos, {visualizePathStyle: {stroke: '#ffffff'}});
             }
         }
 	}
