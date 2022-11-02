@@ -13,6 +13,17 @@ var roleRepairer = {
 	    }
 
 		if(creep.memory.repairing) {
+		    var targetContainer = creep.room.find(FIND_STRUCTURES, {
+				filter: (structure) => {
+					return (structure.hits < structure.hitsMax) && (structure.structureType == STRUCTURE_CONTAINER);
+				}
+			});
+			if(targetContainer > 1) {
+				if(creep.repair(targetContainer) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(targetContainer, {visualizePathStyle: {stroke: '#ffffff'}});
+				}
+			}
+			
 	        var closestDamagedStructure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
 				filter: (structure) => {return (structure.hits < structure.hitsMax) && (structure.structureType != STRUCTURE_WALL);}
 			});

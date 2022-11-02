@@ -18,6 +18,8 @@ var roleLinkToStore = {
         } else {
             if (targetLink.store.getUsedCapacity(RESOURCE_ENERGY) > 0) {
                 creep.withdraw(targetLink, RESOURCE_ENERGY);
+            }
+            if (creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0) {
                 creep.transfer(roomStorage, RESOURCE_ENERGY);
             }
         }

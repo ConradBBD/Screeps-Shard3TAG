@@ -27,8 +27,14 @@ var roleTransorter = {
             });
             var otherTargets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_TOWER) && 
+                        return (structure.structureType == STRUCTURE_TOWER || structure.structureType == STRUCTURE_CONTAINER) && 
                                 structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    }
+            });
+            var bigUpgradersRefill = creep.room.find(FIND_CREEPS, {
+                    filter: (creep) => {
+                        return (creep.memory.role == "bigupgrader") && 
+                                creep.store.getFreeCapacity(RESOURCE_ENERGY) > 200;
                     }
             });
             if (spawnTargets.length > 0) {
@@ -42,6 +48,10 @@ var roleTransorter = {
             } else if (otherTargets.length > 0) {
                 if(creep.transfer(otherTargets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(otherTargets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                }
+            } else if (bigUpgradersRefill > 0) {
+                if(creep.transfer(bigUpgradersRefill[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(bigUpgradersRefill[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
         }

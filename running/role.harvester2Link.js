@@ -18,7 +18,7 @@ var roleHarvester2Link = {
             }
         }
         else {
-            if (link1.store.getFreeCapacity(RESOURCE_ENERGY) >= 100) {
+            if (link1.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
                 creep.transfer(link1, RESOURCE_ENERGY);
             }
             else {
