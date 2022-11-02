@@ -196,7 +196,7 @@ module.exports.loop = function () {
     if(reservers.length < 1) {
         var newName = 'Reserver' + Game.time;
         console.log('Spawning new reserver: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, CLAIM, CLAIM, CARRY, MOVE, MOVE], newName, 
+        Game.spawns['Spawn1'].spawnCreep([CLAIM, CLAIM, MOVE, MOVE], newName, 
             {memory: {role: 'reserver'}});
     }
 
@@ -249,38 +249,38 @@ module.exports.loop = function () {
             {memory: {role: 'wallAttacker'}});
     }
 
-    if(remoteHarvesters21.length < 0) {
+    if(remoteHarvesters21.length < 1) {
         var newName = 'RemoteHarvester21_' + Game.time;
         console.log('Spawning new RemoteHarvester21: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'remoteharv21'}});
     }
 
-    if(remoteHarvesters22.length < 0) {
+    if(remoteHarvesters22.length < 1) {
         var newName = 'RemoteHarvester22_' + Game.time;
         console.log('Spawning new RemoteHarvester22: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'remoteharv22'}});
     }
 
-    if(remoteRetrievers21.length < 0) {
+    if(remoteRetrievers21.length < 1) {
         var newName = 'remoteRetrievers21_' + Game.time;
         console.log('Spawning new remoteRetrievers21: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'remoteretr21'}});
     }
 
-    if(remoteRetrievers22.length < 0) {
+    if(remoteRetrievers22.length < 1) {
         var newName = 'remoteRetrievers22_' + Game.time;
         console.log('Spawning new remoteRetrievers22: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'remoteretr22'}});
     }
 
-    if(reservers2.length < 2) {
+    if(reservers2.length < 1) {
         var newName = 'reserver2_' + Game.time;
         console.log('Spawning new reserver2: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, CLAIM, CLAIM, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
+        Game.spawns['Spawn1'].spawnCreep([CLAIM, CLAIM, MOVE, MOVE], newName, 
             {memory: {role: 'reserver2'}});
     }
     
