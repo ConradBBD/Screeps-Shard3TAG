@@ -11,13 +11,13 @@ var roleHarvesterRemote2_2 = {
         if (creep.room.name == 'E37N52') {
 
             if (!creep.memory.inPosition) {
-                const targetPos = new RoomPosition(30, 48, 'E37N52');
+                const targetPos = new RoomPosition(32, 48, 'E37N52');
                 creep.moveTo(targetPos, {visualizePathStyle: {stroke: '#ffffff'}});
                 if (creep.pos.isEqualTo(targetPos)) {
                     creep.memory.inPosition = true;
                 }
             } else {
-                const targetPos = new RoomPosition(31, 20, 'E37N51');
+                const targetPos = new RoomPosition(32, 20, 'E37N51');
                 creep.moveTo(targetPos, {visualizePathStyle: {stroke: '#ffffff'}});
             }
         }
