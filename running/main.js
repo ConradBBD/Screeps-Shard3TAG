@@ -238,7 +238,7 @@ module.exports.loop = function () {
     if(defenders2.length < 1) {
         var newName = 'Defender2_' + Game.time;
         console.log('Spawning new defender2: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, TOUGH, TOUGH, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK], newName, 
+        Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK], newName, 
             {memory: {role: 'attackerdefender2'}});
     }
 
