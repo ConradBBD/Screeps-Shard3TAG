@@ -19,10 +19,10 @@ var roleHarvesterRemote2_1 = require('role.harvester_remote2_1');
 var roleHarvesterRemote2_2 = require('role.harvester_remote2_2');
 var roleRetrieverRemote2_1 = require('role.retriever_remote2_1');
 var roleRetrieverRemote2_2 = require('role.retriever_remote2_2');
-var roleReserver2 = require("role.reserver2");
-var roleTestAllies = require("role.testAllies");
+var roleReserver2 = require('role.reserver2');
+var roleTestAllies = require('role.testAllies');
 
-const Pathing = require("pathing");
+const Pathing = require('pathing');
 
 
 // Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, TOUGH, TOUGH, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK], "Attacker1", {memory: {role: 'attackerdefender'}});
@@ -400,6 +400,6 @@ module.exports.loop = function () {
         if(creep.memory.role == 'testAllies') {
             roleTestAllies.run(creep);
         }
-        Pathing.runMoves();
     }
+    Pathing.runMoves();
 }
