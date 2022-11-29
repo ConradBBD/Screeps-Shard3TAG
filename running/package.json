@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "screeps-pathfinding": "^2.0.8"
+  }
+}

@@ -20,12 +20,30 @@ var roleHarvesterRemote2_2 = require('role.harvester_remote2_2');
 var roleRetrieverRemote2_1 = require('role.retriever_remote2_1');
 var roleRetrieverRemote2_2 = require('role.retriever_remote2_2');
 var roleReserver2 = require("role.reserver2");
+var roleTestAllies = require("role.testAllies");
+
+const Pathing = require("pathing");
 
 
 // Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, TOUGH, TOUGH, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK], "Attacker1", {memory: {role: 'attackerdefender'}});
 
+global.lastMemoryTick = undefined;
+function tryInitSameMemory() {
+    if (lastMemoryTick && global.LastMemory && Game.time == (lastMemoryTick + 1)) {
+        delete global.Memory
+        global.Memory = global.LastMemory
+        RawMemory._parsed = global.LastMemory
+    } else {
+        Memory;
+        global.LastMemory = RawMemory._parsed
+    }
+    lastMemoryTick = Game.time
+}
+
 
 module.exports.loop = function () {
+    
+    tryInitSameMemory();
     
     if (Game.cpu.bucket >= 10000) {
         Game.cpu.generatePixel();
@@ -37,10 +55,16 @@ module.exports.loop = function () {
             console.log('Clearing non-existing creep memory:', name);
         }
     }
+    
+    if (!Memory.diplomacy.allies) {
+        Memory.diplomacy.allies = [];
+    }
 
     var tower = Game.getObjectById('6345c1f45e37700aabdaea7d');
     if(tower) {
-        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
+				filter: (creep) => {return !Memory.diplomacy.allies.includes(creep.owner.username);}
+			});
         if(closestHostile) {
             tower.attack(closestHostile);
         }
@@ -48,7 +72,19 @@ module.exports.loop = function () {
     
     var tower = Game.getObjectById('634a90128c08ceedd36f5075');
     if(tower) {
-        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
+				filter: (creep) => {return !Memory.diplomacy.allies.includes(creep.owner.username);}
+			});
+        if(closestHostile) {
+            tower.attack(closestHostile);
+        }
+    }
+    
+    var tower = Game.getObjectById('63724539d4b18a51cf3fb8f4');
+    if(tower) {
+        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
+				filter: (creep) => {return !Memory.diplomacy.allies.includes(creep.owner.username);}
+			});
         if(closestHostile) {
             tower.attack(closestHostile);
         }
@@ -144,7 +180,7 @@ module.exports.loop = function () {
             {memory: {role: 'retriever'}});
     }
 
-    if(retrieversRemote.length < 3) {
+    if(retrieversRemote.length < 2) {
         var newName = 'RetrieverRemote' + Game.time;
         console.log('Spawning new retriever_remote: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, CARRY, MOVE, MOVE, MOVE], newName, 
@@ -186,7 +222,7 @@ module.exports.loop = function () {
             {memory: {role: 'upgrader'}});
     }
     
-    if(bigUpgraders.length < 0) {
+    if(bigUpgraders.length < 1) {
         var newName = 'BigUpgrader' + Game.time;
         console.log('Spawning new bigUpgrader: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], newName, 
@@ -200,10 +236,10 @@ module.exports.loop = function () {
             {memory: {role: 'reserver'}});
     }
 
-    if(builders.length < 0) {
+    if(builders.length < 1) {
         var newName = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], newName, 
+        Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'builder'}});
     }
 
@@ -221,66 +257,66 @@ module.exports.loop = function () {
             {memory: {role: 'repairerWalls'}});
     }
 
-    if(transporters.length < 3) {
+    if(transporters.length < 4) {
         var newName = 'Transporter' + Game.time;
         console.log('Spawning new transporter: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, MOVE, MOVE], newName, 
+        Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, CARRY, MOVE, MOVE], newName, 
             {memory: {role: 'transporter'}});
     }
     
     if(defenders.length < 0) {
         var newName = 'Defender' + Game.time;
         console.log('Spawning new defender: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, TOUGH, TOUGH, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK], newName, 
+        Game.spawns['Spawn2'].spawnCreep([TOUGH, TOUGH, TOUGH, TOUGH, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK, ATTACK, ATTACK], newName, 
             {memory: {role: 'attackerdefender'}});
     }
 
     if(defenders2.length < 0) {
         var newName = 'Defender2_' + Game.time;
         console.log('Spawning new defender2: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK], newName, 
+        Game.spawns['Spawn2'].spawnCreep([TOUGH, TOUGH, MOVE, MOVE, MOVE, MOVE, MOVE, ATTACK, ATTACK, ATTACK], newName, 
             {memory: {role: 'attackerdefender2'}});
     }
 
     if(wallAttackers.length < 0) {
         var newName = 'WallAttacker' + Game.time;
         console.log('Spawning new wall attacker: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([ MOVE, ATTACK], newName, 
+        Game.spawns['Spawn2'].spawnCreep([ MOVE, ATTACK], newName, 
             {memory: {role: 'wallAttacker'}});
     }
 
     if(remoteHarvesters21.length < 1) {
         var newName = 'RemoteHarvester21_' + Game.time;
         console.log('Spawning new RemoteHarvester21: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
+        Game.spawns['Spawn2'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'remoteharv21'}});
     }
 
     if(remoteHarvesters22.length < 1) {
         var newName = 'RemoteHarvester22_' + Game.time;
         console.log('Spawning new RemoteHarvester22: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
+        Game.spawns['Spawn2'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'remoteharv22'}});
     }
 
-    if(remoteRetrievers21.length < 1) {
+    if(remoteRetrievers21.length < 2) {
         var newName = 'remoteRetrievers21_' + Game.time;
         console.log('Spawning new remoteRetrievers21: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
+        Game.spawns['Spawn2'].spawnCreep([CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'remoteretr21'}});
     }
 
-    if(remoteRetrievers22.length < 1) {
+    if(remoteRetrievers22.length < 2) {
         var newName = 'remoteRetrievers22_' + Game.time;
         console.log('Spawning new remoteRetrievers22: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE], newName, 
+        Game.spawns['Spawn2'].spawnCreep([CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE], newName, 
             {memory: {role: 'remoteretr22'}});
     }
 
     if(reservers2.length < 1) {
         var newName = 'reserver2_' + Game.time;
         console.log('Spawning new reserver2: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([CLAIM, CLAIM, MOVE, MOVE], newName, 
+        Game.spawns['Spawn2'].spawnCreep([CLAIM, CLAIM, MOVE, MOVE], newName, 
             {memory: {role: 'reserver2'}});
     }
     
@@ -361,5 +397,9 @@ module.exports.loop = function () {
         if(creep.memory.role == 'reserver2') {
             roleReserver2.run(creep);
         }
+        if(creep.memory.role == 'testAllies') {
+            roleTestAllies.run(creep);
+        }
+        Pathing.runMoves();
     }
 }
